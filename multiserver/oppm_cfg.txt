@@ -9,4 +9,4 @@
         authors = "Lauriero"
         hidden = true, -- Add this optional line to make your package not visible in "oppm list", useful for custom dependency libraries
     }
-}
+}d
