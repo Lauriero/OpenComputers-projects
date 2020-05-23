@@ -18,12 +18,22 @@ function log(message, from)
     print("["..from.."] : "..message);
 end
 
+--Global variables--
+local master = "";
+local port = 0;
+
 --Commands list--
 local commands = {};
 
 function commands.voice()
     print("Gaf-gaf");
+	print(master, port);
 	component.modem.send(master, port, "Gaf-gaf");
+end
+
+function commands.calculate (params)
+	print(params[1] + params[2]);
+	component.modem.send(master, port, tonumber(params[1]) + tonumber(params[2]));
 end
 
 --Starting--
@@ -35,7 +45,6 @@ port = tonumber(io.read());
 component.modem.open(port);
 log("I waiting for my master on "..port, "slave");
 
-local master = "";
 while true do
     ----------------Waiting for incoming message-------------
     local _, _, from, _, _, message = event.pull("modem_message");
@@ -49,7 +58,7 @@ while true do
     end
 
     --------------On master command---------------------------
-    if from == master and message ~= "" and message ~= "I am your master now, bitches!" then
+    if from == master and message ~= nil and message ~= "" and message ~= "I am your master now, bitches!" then
 		--Remove spaces--
 		message = string.gsub(message, " ", "");
 
@@ -66,7 +75,7 @@ while true do
 		    log("I don't know the command what master says me", "slave");
 			component.modem.send(master, port, "I don't know this command, master");
 		else
-		    log("Doing what master said", "slave");
+		    log("Doing what master said using params", "slave");
 			component.modem.send(master, port, "Yes, master");
 		    commands[command_name](command_params);
 		end

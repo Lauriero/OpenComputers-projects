@@ -1,12 +1,19 @@
-["Lauriero/multiserver"] = {
-      ["multi-server"] = {
-        files = {
-          ["master/multiserver.lua"] = "/",
-          ["master/slave_server_script.lua"] = "/"
+["Lauriero/OpenComputers-projects"]={
+      ["multiserver"] = {
+        ["files"] = {
+          ["master/multiserver/multiserver.lua"] = "/lib", --executable programs should always be installed to /bin
+          ["master/multiserver/multiserver_slave_script.lua"] = "/bin", --libraries should always be installed to /lib
         },
-        name = "multiserver",--This is for "oppm info"
-        description = "Package for make calculation faster with many computers",
-        authors = "Lauriero"
-        hidden = true, -- Add this optional line to make your package not visible in "oppm list", useful for custom dependency libraries
+        ["repo"] = "tree/master/multiserver",
+        ["dependencies"] = {
+
+        },
+        ["name"] = "multiserver-pkg",
+        ["description"] = "Bla",
+        ["authors"] = "Lauriero"
+      },
     }
-}d
+
+pastebin get -f vPd0pCP9 lib/multiserver.lua
+pastebin get -f ki0DxESy scripts/slave_script.lua
+pastebin get -f Cnw1fT2L scripts/multiserver_test.lua

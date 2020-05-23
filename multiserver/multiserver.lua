@@ -44,7 +44,7 @@ function multiserver.start(port)
 		while true do
 			component.modem.broadcast(port, "I am your master now, bitches!");
 			local _, _, from, _, _, message = event.pull(1, "modem_message");
-			if message == "I wanna be your slave, master" and ~hasValue(slaves, from) then
+			if message == "I wanna be your slave, master" and not hasValue(slaves, from) then
 				log("Now we have a new slave in our dungeon: "..from, "master");
 				table.insert(slaves, from);
 			end
